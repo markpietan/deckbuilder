@@ -1,8 +1,22 @@
+
 import React from 'react';
 
-const DeckList = (props) => {
+const DeckList = ({ deck }) => {
+  let cardCount = deck.reduce((cardCount, card) => {
+    return cardCount + card.count
+  }, 0);
+
   return (
-  <div></div>
+    <div id="deck">
+      <h3>Your deck so far ({ cardCount } cards):</h3>
+      <div class="DeckList">
+      {deck.map(card => (
+        <p key={ card.id }>
+          ({ card.count }x) { card.name }
+        </p>
+      ))}
+      </div>
+    </div>
   );
 }
 
