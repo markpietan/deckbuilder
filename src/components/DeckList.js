@@ -1,23 +1,27 @@
+import React from "react";
 
-import React from 'react';
-
-const DeckList = ({ deck }) => {
+const DeckList = ({ deck, addCardToDeck, removeCardFromDeck }) => {
   let cardCount = deck.reduce((cardCount, card) => {
-    return cardCount + card.count
+    return cardCount + card.count;
   }, 0);
 
   return (
     <div id="deck">
-      <h3>Your deck so far ({ cardCount } cards):</h3>
+      <h3>Your deck so far ({cardCount} cards):</h3>
       <div class="DeckList">
-      {deck.map(card => (
-        <p key={ card.id }>
-          ({ card.count }x) { card.name }
-        </p>
-      ))}
+      {deck.map(({ id, name, count }) => (
+          <p key={id}>
+            <span>
+              ({count}x) {name}
+            </span>
+            <br />
+            <button onClick={() => addCardToDeck({ id, name })}> + </button>
+            <button onClick={() => removeCardFromDeck({ id })}> - </button>
+          </p>
+        ))}
       </div>
     </div>
   );
-}
+};
 
 export default DeckList;
